@@ -10,5 +10,8 @@ public class t_cal {
     public double calculateTotal(int qty, double pricePerUnit) {
         return qty * pricePerUnit;
     }
-    }
+
+   
+}
+    
 
