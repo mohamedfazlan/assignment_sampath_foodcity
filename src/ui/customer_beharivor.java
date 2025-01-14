@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import oop_codes.customer_analysis;
 import oop_codes.t_cal;
+import oop_codes.t_cal2;
 
 /**
  *
@@ -343,7 +344,7 @@ public class customer_beharivor extends javax.swing.JFrame {
             double pricePerUnit = rs.getDouble("priceperunit");
 
             // Calculate total spent using polymorphism
-            t_cal calculator = new t_cal();
+            t_cal calculator = new t_cal2();
             double totalSpent = calculator.calculateTotal(totalQty, pricePerUnit);
 
             // Create encapsulated object

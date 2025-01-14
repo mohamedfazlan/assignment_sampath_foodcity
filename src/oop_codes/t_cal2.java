@@ -5,12 +5,14 @@
  */
 package oop_codes;
 
+/**
+ *
+ * @author FAZLAN
+ */
+public class t_cal2 extends t_cal {
 
-public class t_cal {
+    @Override
     public double calculateTotal(int qty, double pricePerUnit) {
-        return qty * pricePerUnit;
+        return qty * pricePerUnit ; 
     }
-   
 }
-    
-

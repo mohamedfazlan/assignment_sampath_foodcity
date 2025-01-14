@@ -19,24 +19,23 @@ import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import oop_codes.Total;
 import oop_codes.add_product;
+import oop_codes.t_cal;
+import oop_codes.t_cal2;
 import static org.omg.CORBA.AnySeqHelper.insert;
 
-
-
 public class add_product_p extends javax.swing.JFrame {
-    
 
     public add_product_p() {
         initComponents();
         showProducts();
-        
+
     }
+
     public String getTxtPriceText() {
         return txtprice.getText();  // Return the text inside the txtprice field
     }
-    
+
     Connection con;
     PreparedStatement insert;
 
@@ -571,8 +570,11 @@ public class add_product_p extends javax.swing.JFrame {
             float unitPrice = Float.parseFloat(unitprice);
 
             // Calculate total price
-            Total totalCalculator = new Total(quantity, unitPrice);
-            float totalPrice = totalCalculator.calculateTotalPrice();
+            t_cal calculator = new t_cal2();  
+
+            // Use polymorphism to calculate total price by calling the overridden method in t_cal2
+            double totalPrice = calculator.calculateTotal(quantity, unitPrice);
+
 
             txtprice.setText(String.format("%.2f", totalPrice));
             // Validate and convert date
@@ -600,7 +602,7 @@ public class add_product_p extends javax.swing.JFrame {
             pst.setInt(3, quantity);
             pst.setFloat(4, unitPrice);
             pst.setDate(5, sqlDate);
-            pst.setFloat(6, totalPrice);
+            pst.setFloat(6, (float)totalPrice);
             pst.setString(7, region);
             pst.setInt(8, Integer.parseInt(customerid));
 
@@ -745,7 +747,6 @@ public class add_product_p extends javax.swing.JFrame {
         objsales.setVisible(true);
     }//GEN-LAST:event_jButton10ActionPerformed
 
-    //insert btn method 
     public String insert_product(String customerid, String productid, String productname, String unitprice, String region, String qty, java.util.Date utilDate) {
         try {
             // Validate for empty fields
@@ -757,11 +758,14 @@ public class add_product_p extends javax.swing.JFrame {
             int quantity = Integer.parseInt(qty);
             float unitPrice = Float.parseFloat(unitprice);
 
-            // Use polymorphism to calculate total price               
-            Total totalCalculator = new Total(quantity, unitPrice);
-            float totalPrice = totalCalculator.calculateTotalPrice();
+            // Create a reference of the superclass t_cal to hold an object of subclass t_cal2
+            t_cal calculator = new t_cal2();  
 
-            txtprice.setText(String.format("%.2f", totalPrice));  // Format total price
+            // Use polymorphism to calculate total price by calling the overridden method in t_cal2
+            double totalPrice = calculator.calculateTotal(quantity, unitPrice);
+
+            // Format total price
+            txtprice.setText(String.format("%.2f", totalPrice));
 
             // Convert date to SQL Date format
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
@@ -780,7 +784,7 @@ public class add_product_p extends javax.swing.JFrame {
             pst.setInt(4, Integer.parseInt(qty));
             pst.setFloat(5, Float.parseFloat(unitprice));
             pst.setDate(6, sqlDate);
-            pst.setFloat(7, totalPrice);
+            pst.setFloat(7, (float) totalPrice);
             pst.setString(8, region);
 
             // Execute update and handle SQL exceptions
@@ -796,10 +800,6 @@ public class add_product_p extends javax.swing.JFrame {
         }
     }
 
-    
-    
-    
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

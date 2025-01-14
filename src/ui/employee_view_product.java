@@ -15,7 +15,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import oop_codes.Total;
 import oop_codes.add_product;
 
 /**
