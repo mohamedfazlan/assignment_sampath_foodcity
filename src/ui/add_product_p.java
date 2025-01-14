@@ -577,6 +577,7 @@ public class add_product_p extends javax.swing.JFrame {
 
 
             txtprice.setText(String.format("%.2f", totalPrice));
+            
             // Validate and convert date
             java.util.Date utilDate = date1.getDate();
             if (utilDate == null) {
