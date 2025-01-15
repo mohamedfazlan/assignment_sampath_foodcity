@@ -15,6 +15,8 @@ import java.util.logging.Logger;
  *
  * @author FAZLAN
  */
+
+
 public class database {
     
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/sampath_foodcity";

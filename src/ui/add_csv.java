@@ -1,4 +1,3 @@
-
 package ui;
 
 import db.database;
@@ -24,12 +23,10 @@ import java.text.SimpleDateFormat;
  */
 public class add_csv extends javax.swing.JFrame {
 
-    
     public add_csv() {
         initComponents();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -67,86 +64,82 @@ public class add_csv extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
-        
-      try {
-    JFileChooser jfilech = new JFileChooser();
-    jfilech.setDialogTitle("Select a CSV file");
-    int userSelected = jfilech.showOpenDialog(null);
 
-    if (userSelected == JFileChooser.APPROVE_OPTION) {
-        File filepath = jfilech.getSelectedFile();
-        String file = filepath.getAbsolutePath();
+        try {
+            JFileChooser jfilech = new JFileChooser();
+            jfilech.setDialogTitle("Select a CSV file");
+            int userSelected = jfilech.showOpenDialog(null);
 
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String line;
-            boolean firstLine = true;
+            if (userSelected == JFileChooser.APPROVE_OPTION) {
+                File filepath = jfilech.getSelectedFile();
+                String file = filepath.getAbsolutePath();
 
-            while ((line = br.readLine()) != null) {
-                if (firstLine) {
-                    firstLine = false;
-                    continue;
-                }
+                try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                    String line;
+                    boolean firstLine = true;
 
-                // Print the line read from the CSV file
-                System.out.println("Line read: " + line);
+                    while ((line = br.readLine()) != null) {
+                        if (firstLine) {
+                            firstLine = false;
+                            continue;
+                        }
 
-                try {
-                    Connection con = database.getConnection();
-                    String query = "INSERT INTO products(customer_id, product_id, product_name, qty, priceperunit, date, totalprice,region) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-                    PreparedStatement pst = con.prepareStatement(query);
-                    String[] val = line.split(",");
+                        // Print the line read from the CSV file
+                        System.out.println("Line read: " + line);
 
-                    // Print the split values
-                    System.out.println("Parsed values: " + Arrays.toString(val));
+                        try {
+                            Connection con = database.getConnection();
+                            String query = "INSERT INTO products(customer_id, product_id, product_name, qty, priceperunit, date, totalprice,region) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                            PreparedStatement pst = con.prepareStatement(query);
+                            String[] val = line.split(",");
 
-                    if (val.length == 9) { // Adjusted for 9 columns but skipping the first (TransactionID)
-                        pst.setString(1, val[1].trim()); // CustomerID
-                        pst.setString(2, val[2].trim()); // ProductID
-                        pst.setString(3, val[3].trim()); // ProductName
-                        pst.setInt(4, Integer.parseInt(val[4].trim())); // Quantity
-                        pst.setFloat(5, Float.parseFloat(val[5].trim())); // PriceperUnit
+                            // Print the split values
+                            System.out.println("Parsed values: " + Arrays.toString(val));
 
-                        // Parse the date
-                        String dateString = val[6].trim(); 
-                        SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
-                        java.util.Date parsedDate = sdf.parse(dateString);
-                        java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
-                        pst.setDate(6, sqlDate);
+                            if (val.length == 9) { // Adjusted for 9 columns but skipping the first (TransactionID)
+                                pst.setString(1, val[1].trim()); // CustomerID
+                                pst.setString(2, val[2].trim()); // ProductID
+                                pst.setString(3, val[3].trim()); // ProductName
+                                pst.setInt(4, Integer.parseInt(val[4].trim())); // Quantity
+                                pst.setFloat(5, Float.parseFloat(val[5].trim())); // PriceperUnit
 
-                        pst.setFloat(7, Float.parseFloat(val[7].trim())); // TotalPrice
-                        pst.setString(8, val[8].trim()); // Region
+                                // Parse the date
+                                String dateString = val[6].trim();
+                                SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
+                                java.util.Date parsedDate = sdf.parse(dateString);
+                                java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
+                                pst.setDate(6, sqlDate);
 
-                        // Print the prepared statement values before execution
-                        System.out.println("Prepared statement values set successfully.");
+                                pst.setFloat(7, Float.parseFloat(val[7].trim())); // TotalPrice
+                                pst.setString(8, val[8].trim()); // Region
 
-                        pst.executeUpdate();
-                        System.out.println("Data inserted into database successfully.");
-                    } else {
-                        System.out.println("Invalid data format. Expected 9 fields, but got: " + val.length);
+                                // Print the prepared statement values before execution
+                                System.out.println("Prepared statement values set successfully.");
+
+                                pst.executeUpdate();
+                                System.out.println("Data inserted into database successfully.");
+                            } else {
+                                System.out.println("Invalid data format. Expected 9 fields, but got: " + val.length);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace(); // Print the stack trace for debugging
+                            JOptionPane.showMessageDialog(null, e.getMessage());
+                        }
                     }
+                    JOptionPane.showMessageDialog(null, "Success!");
                 } catch (Exception e) {
                     e.printStackTrace(); // Print the stack trace for debugging
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "No file selected");
             }
-            JOptionPane.showMessageDialog(null, "Success!");
         } catch (Exception e) {
             e.printStackTrace(); // Print the stack trace for debugging
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-    } else {
-        JOptionPane.showMessageDialog(null, "No file selected");
-    }
-} catch (Exception e) {
-    e.printStackTrace(); // Print the stack trace for debugging
-    JOptionPane.showMessageDialog(null, e.getMessage());
-}
 
 
-        
-        
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
