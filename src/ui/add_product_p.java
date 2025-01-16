@@ -19,6 +19,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import oop_codes.ObjectFactory;
 import oop_codes.add_product;
 import oop_codes.t_cal;
 import oop_codes.t_cal2;
@@ -570,14 +571,13 @@ public class add_product_p extends javax.swing.JFrame {
             float unitPrice = Float.parseFloat(unitprice);
 
             // Calculate total price
-            t_cal calculator = new t_cal2();  
+            t_cal calculator = new t_cal2();
 
             // Use polymorphism to calculate total price by calling the overridden method in t_cal2
             double totalPrice = calculator.calculateTotal(quantity, unitPrice);
 
-
             txtprice.setText(String.format("%.2f", totalPrice));
-            
+
             // Validate and convert date
             java.util.Date utilDate = date1.getDate();
             if (utilDate == null) {
@@ -603,7 +603,7 @@ public class add_product_p extends javax.swing.JFrame {
             pst.setInt(3, quantity);
             pst.setFloat(4, unitPrice);
             pst.setDate(5, sqlDate);
-            pst.setFloat(6, (float)totalPrice);
+            pst.setFloat(6, (float) totalPrice);
             pst.setString(7, region);
             pst.setInt(8, Integer.parseInt(customerid));
 
@@ -682,31 +682,31 @@ public class add_product_p extends javax.swing.JFrame {
 
     private void txtpidKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpidKeyPressed
 
-        //key pressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            //key pressed
+            if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
-            try {
-                Connection con = database.getConnection();
-                String productcode = txtpid.getText();
-                insert = con.prepareStatement("select * from products where product_id=?");
-                insert.setString(1, productcode);
-                ResultSet rs = insert.executeQuery();
+                try {
+                    Connection con = database.getConnection();
+                    String productcode = txtpid.getText();
+                    insert = con.prepareStatement("select * from products where product_id=?");
+                    insert.setString(1, productcode);
+                    ResultSet rs = insert.executeQuery();
 
-                if (rs.next() == false) {
-                    JOptionPane.showMessageDialog(this, "Book not found");
-                } else {
-                    String pname = rs.getString("product_name");
-                    txtpname.setText(pname.trim());
+                    if (rs.next() == false) {
+                        JOptionPane.showMessageDialog(this, "Book not found");
+                    } else {
+                        String pname = rs.getString("product_name");
+                        txtpname.setText(pname.trim());
 
-                    String price = rs.getString("priceperunit");
-                    txtpriceunit.setText(price.trim());
+                        String price = rs.getString("priceperunit");
+                        txtpriceunit.setText(price.trim());
 
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(add_product_p.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (SQLException ex) {
-                Logger.getLogger(add_product_p.class.getName()).log(Level.SEVERE, null, ex);
-            }
 
-        }
+            }
 
 
     }//GEN-LAST:event_txtpidKeyPressed
@@ -748,58 +748,77 @@ public class add_product_p extends javax.swing.JFrame {
         objsales.setVisible(true);
     }//GEN-LAST:event_jButton10ActionPerformed
 
-    public String insert_product(String customerid, String productid, String productname, String unitprice, String region, String qty, java.util.Date utilDate) {
+    public String insert_product(
+            String customerId,
+            String productId,
+            String productName,
+            String unitPriceStr,
+            String region,
+            String quantityStr,
+            java.util.Date utilDate) {
+
         try {
-            // Validate for empty fields
-            if (customerid.equals("") || productid.equals("") || productname.equals("") || unitprice.equals("") || region.equals("") || qty.equals("")) {
-                return "Please fill in all required fields";  // Return error message if any field is empty
+            // Validate input fields
+            if (customerId.isEmpty() || productId.isEmpty() || productName.isEmpty()
+                    || unitPriceStr.isEmpty() || region.isEmpty() || quantityStr.isEmpty()) {
+                return "Please fill in all required fields";
             }
 
-            // Convert qty and unit price to numbers
-            int quantity = Integer.parseInt(qty);
-            float unitPrice = Float.parseFloat(unitprice);
+            // Parse input strings to appropriate data types
+            int quantity = Integer.parseInt(quantityStr);
+            float unitPrice = Float.parseFloat(unitPriceStr);
 
-            // Create a reference of the superclass t_cal to hold an object of subclass t_cal2
-            t_cal calculator = new t_cal2();  
-
-            // Use polymorphism to calculate total price by calling the overridden method in t_cal2
+            // Create calculator using factory and calculate total price
+            t_cal calculator = ObjectFactory.createCalculator();
             double totalPrice = calculator.calculateTotal(quantity, unitPrice);
 
-            // Format total price
+            // Format total price (GUI interaction may be handled elsewhere)
             txtprice.setText(String.format("%.2f", totalPrice));
 
-            // Convert date to SQL Date format
-            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            // Convert date to SQL date using factory
+            java.sql.Date sqlDate = ObjectFactory.convertToSqlDate(utilDate);
 
-            // Establish connection to the database
-            Connection con = database.getConnection();
+            // Get database connection using factory
+            Connection connection = ObjectFactory.createDatabaseConnection();
 
-            // Prepare SQL query for inserting product data
-            String query = "INSERT INTO products(customer_id, product_id, product_name, qty, priceperunit, date, totalprice, region) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement pst = con.prepareStatement(query);
-
-            // Set values in PreparedStatement
-            pst.setInt(1, Integer.parseInt(customerid));
-            pst.setInt(2, Integer.parseInt(productid));
-            pst.setString(3, productname);
-            pst.setInt(4, Integer.parseInt(qty));
-            pst.setFloat(5, Float.parseFloat(unitprice));
-            pst.setDate(6, sqlDate);
-            pst.setFloat(7, (float) totalPrice);
-            pst.setString(8, region);
-
-            // Execute update and handle SQL exceptions
-            try {
-                pst.executeUpdate();
-                return "Product Successfully Added";  // Return success message
-            } catch (SQLException ex) {
-                return "Error: " + ex.getMessage();  // Return SQL error message
+            if (connection == null) {
+                return "Database connection failed";
             }
 
-        } catch (Exception e) {
-            return e.getMessage();  // Return any other exception error message
+            // SQL query for inserting product data
+            String query = "INSERT INTO products(customer_id, product_id, product_name, qty, priceperunit, date, totalprice, region) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+            // Prepare the statement using the factory
+            PreparedStatement preparedStatement = ObjectFactory.createPreparedStatement(connection, query);
+
+            // Set parameters
+            preparedStatement.setInt(1, Integer.parseInt(customerId));
+            preparedStatement.setInt(2, Integer.parseInt(productId));
+            preparedStatement.setString(3, productName);
+            preparedStatement.setInt(4, quantity);
+            preparedStatement.setFloat(5, unitPrice);
+            preparedStatement.setDate(6, sqlDate);
+            preparedStatement.setFloat(7, (float) totalPrice);
+            preparedStatement.setString(8, region);
+
+            // Execute the query and handle result
+            try {
+                preparedStatement.executeUpdate();
+                return "Product Successfully Added";
+            } catch (SQLException sqlException) {
+                return "Error: " + sqlException.getMessage();
+            }
+
+        } catch (NumberFormatException numberFormatException) {
+            return "Invalid number format: " + numberFormatException.getMessage();
+        } catch (Exception exception) {
+            return "An error occurred: " + exception.getMessage();
         }
     }
+    
+    
+    
+    
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
