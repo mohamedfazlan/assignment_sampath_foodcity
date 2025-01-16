@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import oop_codes.ObjectFactory;
 import oop_codes.best_selling;
 
 public class best_selling_product extends javax.swing.JFrame {
@@ -326,15 +327,15 @@ public class best_selling_product extends javax.swing.JFrame {
                 return;
             }
 
-            java.sql.Date sqlStartDate = new java.sql.Date(startDate.getTime());
-            java.sql.Date sqlEndDate = new java.sql.Date(endDate.getTime());
+            java.sql.Date sqlStartDate = ObjectFactory.convertToSqlDate(startDate);
+            java.sql.Date sqlEndDate = ObjectFactory.convertToSqlDate(endDate);
 
             // Database query
             String query = "SELECT product_name, SUM(qty) AS total_quantity "
                     + "FROM products WHERE date BETWEEN ? AND ? "
                     + "GROUP BY product_name ORDER BY total_quantity DESC";
 
-            try (Connection con = database.getConnection();
+            try (Connection con = ObjectFactory.createDatabaseConnection();
                     PreparedStatement stmt = con.prepareStatement(query)) {
 
                 stmt.setDate(1, sqlStartDate);

@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import oop_codes.ObjectFactory;
 import oop_codes.branch_p;
 import oop_codes.t_cal;
 import oop_codes.t_cal2;
@@ -333,7 +334,7 @@ public class brach_performance extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     public void branch_performance(String regionInput, JTable customer_analysis_table, JTextField total, JTextField total_qty, JTextField txtProduct) {
-        try (Connection con = database.getConnection()) {
+        try (Connection con = ObjectFactory.createDatabaseConnection()) {
             // Validate region input
             if (regionInput.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Please enter a valid region.");

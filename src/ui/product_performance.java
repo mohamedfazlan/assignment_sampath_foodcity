@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import oop_codes.ObjectFactory;
 import oop_codes.produtc_performance;
 import oop_codes.t_cal;
 import oop_codes.t_cal2;
@@ -336,7 +337,7 @@ public class product_performance extends javax.swing.JFrame {
                     + "ORDER BY total_qty DESC";
 
             // Use try-with-resources to ensure connection is closed
-            try (Connection con = database.getConnection();
+            try (Connection con = ObjectFactory.createDatabaseConnection();
                     PreparedStatement stmt = con.prepareStatement(query,
                             ResultSet.TYPE_SCROLL_INSENSITIVE,
                             ResultSet.CONCUR_READ_ONLY)) {

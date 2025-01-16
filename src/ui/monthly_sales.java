@@ -22,6 +22,7 @@ import com.toedter.calendar.JDateChooser;
 import java.util.Calendar;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import oop_codes.ObjectFactory;
 import oop_codes.report_total_month;
 import oop_codes.t_cal;
 import oop_codes.t_cal2;
@@ -310,7 +311,7 @@ public class monthly_sales extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         monthly_sales ms = new monthly_sales();
         ms.monthly_sales(startDate, enddate, product_table_1, customer_table_2, txttotal);
 
@@ -378,15 +379,15 @@ public class monthly_sales extends javax.swing.JFrame {
             // Clear the table
             DefaultTableModel model = (DefaultTableModel) product_table_1.getModel();
             model.setRowCount(0);
-            
+
             DefaultTableModel model2 = (DefaultTableModel) customer_table_2.getModel();
             model2.setRowCount(0);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-   public void monthly_sales(JDateChooser startDate,JDateChooser enddate, JTable product_table_1, JTable customer_table_2, JTextField txttotal){
-       
-               // Your main code
+    public void monthly_sales(JDateChooser startDate, JDateChooser enddate, JTable product_table_1, JTable customer_table_2, JTextField txttotal) {
+
+        // Your main code
         DefaultTableModel productModel = new DefaultTableModel(
                 new String[]{"Product Name", "Quantity", "Priceperunit", "Total Sold"}, 0
         );
@@ -405,8 +406,8 @@ public class monthly_sales extends javax.swing.JFrame {
         double totalSales = 0.0;
 
 // Get the selected start and end dates from the date pickers
-        java.util.Date utilStartDate = startDate.getDate(); 
-        java.util.Date utilEndDate = enddate.getDate();      
+        java.util.Date utilStartDate = startDate.getDate();
+        java.util.Date utilEndDate = enddate.getDate();
 
 // Validate that both start and end dates are selected
         if (utilStartDate == null || utilEndDate == null) {
@@ -428,13 +429,13 @@ public class monthly_sales extends javax.swing.JFrame {
             return; // Exit the method if validation fails
         }
 
-// date format to convert it 
-        java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
-        java.sql.Date sqlEndDate = new java.sql.Date(utilEndDate.getTime());
+// Use ObjectFactory to convert java.util.Date to java.sql.Date
+        java.sql.Date sqlStartDate = ObjectFactory.convertToSqlDate(utilStartDate);
+        java.sql.Date sqlEndDate = ObjectFactory.convertToSqlDate(utilEndDate);
 
         try {
             //  database connection
-            Connection con = database.getConnection();
+            Connection con = ObjectFactory.createDatabaseConnection();
 
             // Query for customer data (customer_id and region) based on the selected date range
             String customerQuery = "SELECT DISTINCT customer_id, region FROM products WHERE date BETWEEN ? AND ?";
@@ -513,12 +514,10 @@ public class monthly_sales extends javax.swing.JFrame {
             ex.printStackTrace();
             // Handle database errors (e.g., show an error message)
             JOptionPane.showMessageDialog(null, "Error retrieving product report: " + ex.getMessage());
-        } 
-       
-   }
-    
-    
-    
+        }
+
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

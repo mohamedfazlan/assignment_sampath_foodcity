@@ -23,6 +23,7 @@ import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import oop_codes.ObjectFactory;
 import oop_codes.t_cal;
 import oop_codes.t_cal2;
 
@@ -364,7 +365,7 @@ public class daily_sales extends javax.swing.JFrame {
         ans.setVisible(true);    }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-       int response = JOptionPane.showConfirmDialog(null, "Are you sure you want to clear all data?",
+        int response = JOptionPane.showConfirmDialog(null, "Are you sure you want to clear all data?",
                 "Clear Confirmation", JOptionPane.YES_NO_OPTION);
 
         if (response == JOptionPane.YES_OPTION) {
@@ -380,9 +381,7 @@ public class daily_sales extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     public void daily_sales(JDateChooser date1, JTable product_report, JTable customer_table, JTextField txttotal_sales) {
-        
-       
-        
+
         DefaultTableModel productModel = new DefaultTableModel(
                 new String[]{"Product Name", "Quantity", "Priceperunit", "Total Sold"}, 0
         );
@@ -402,16 +401,18 @@ public class daily_sales extends javax.swing.JFrame {
 
 // Get the selected date from the date picker (assuming `date1` is your JDatePicker component)
         java.util.Date utilDate = date1.getDate();
-         if (utilDate == null) {
-                JOptionPane.showMessageDialog(null, "Please select a date to check the Daily Sales.");
-                return;
-            }
-        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());  // Convert to java.sql.Date
-        
+        if (utilDate == null) {
+            JOptionPane.showMessageDialog(null, "Please select a date to check the Daily Sales.");
+            return;
+        }
+
+// Use ObjectFactory to convert java.util.Date to java.sql.Date
+        java.sql.Date sqlDate = ObjectFactory.convertToSqlDate(utilDate);
+        // Convert to java.sql.Date
 
         try {
             // Establish database connection
-            Connection con = database.getConnection();
+            Connection con = ObjectFactory.createDatabaseConnection();
 
             // Query for customer data (customer_id and region) based on the selected date
             String customerQuery = "SELECT DISTINCT customer_id, region FROM products WHERE date = ?";

@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import oop_codes.ObjectFactory;
 import oop_codes.customer_analysis;
 import oop_codes.t_cal;
 import oop_codes.t_cal2;
@@ -307,7 +308,7 @@ public class customer_beharivor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
    public void customer_behavriour(JTextField txt_cid, JTable customer_analysis_table) {
-    try (Connection con = database.getConnection()) { // Ensure database.getConnection() is defined
+    try (Connection con = ObjectFactory.createDatabaseConnection()) { // Ensure database.getConnection() is defined
         // Get customer ID from text field
         int customerId = Integer.parseInt(txt_cid.getText().trim());
 

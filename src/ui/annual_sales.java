@@ -21,6 +21,7 @@ import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.util.Calendar;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import oop_codes.ObjectFactory;
 import oop_codes.report_total_month;
 import oop_codes.t_cal;
 import oop_codes.t_cal2;
@@ -359,8 +360,8 @@ public class annual_sales extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       
-         int response = JOptionPane.showConfirmDialog(null, "Are you sure you want to clear all data?",
+
+        int response = JOptionPane.showConfirmDialog(null, "Are you sure you want to clear all data?",
                 "Clear Confirmation", JOptionPane.YES_NO_OPTION);
 
         if (response == JOptionPane.YES_OPTION) {
@@ -370,13 +371,12 @@ public class annual_sales extends javax.swing.JFrame {
             // Clear the table
             DefaultTableModel model = (DefaultTableModel) product_table_1.getModel();
             model.setRowCount(0);
-            
+
             DefaultTableModel model2 = (DefaultTableModel) customer_table_2.getModel();
             model2.setRowCount(0);
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public void annual_sales(JTextField txtyear, JTextField txttotal, JTable product_table_1, JTable customer_table_2) {
@@ -412,8 +412,8 @@ public class annual_sales extends javax.swing.JFrame {
                 return;
             }
 
-            // Establish database connection
-            Connection con = database.getConnection();
+            // Use ObjectFactory to create the database connection
+            Connection con = ObjectFactory.createDatabaseConnection();
 
             // Query for customer data (customer_id and region) based on the selected year
             String customerQuery = "SELECT DISTINCT customer_id, region FROM products WHERE YEAR(date) = ?";
