@@ -247,6 +247,7 @@ public class register_page extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void check_boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_check_boxActionPerformed
+        
         if (check_box.isSelected()) {
             pass.setEchoChar((char) 0);
         } else {

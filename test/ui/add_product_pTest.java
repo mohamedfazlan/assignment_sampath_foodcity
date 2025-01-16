@@ -53,7 +53,8 @@ public class add_product_pTest {
         float expectedTotalPrice = quantity * pricePerUnit;
 
         // Call insert_product method
-        String result = addProductPage.insert_product(customerid, productid, productname, unitprice, region, qty, utilDate);
+        String result = addProductPage.insert_product(customerid, productid, productname, unitprice, 
+        region, qty, utilDate);
 
         // Assert that the product is added successfully
         assertEquals("Product Successfully Added", result);
@@ -75,7 +76,8 @@ public class add_product_pTest {
         String qty = "";
         Date utilDate = new Date();  // Example current date
 
-        String result = addProductPage.insert_product(customerid, productid, productname, unitprice, region, qty, utilDate);
+        String result = addProductPage.insert_product(customerid, productid, productname, unitprice, region, 
+        qty, utilDate);
 
         // Expecting "Please fill in all required fields" as an error
         assertEquals("Please fill in all required fields", result);
@@ -92,7 +94,8 @@ public class add_product_pTest {
         String qty = "2";  // Corrected to valid quantity
         Date utilDate = new Date();  // Example current date
 
-        String result = addProductPage.insert_product(customerid, productid, productname, unitprice, region, qty, utilDate);
+        String result = addProductPage.insert_product(customerid, productid, productname, unitprice, 
+        region, qty, utilDate);
 
         // Check for invalid data error (specific exception message or pattern)
         assertTrue(result.contains("For input string"));

@@ -7,6 +7,7 @@ package oop_codes;
 
 
 public class t_cal {
+    // Calculate the total price based on quantity and unit price
     public double calculateTotal(int qty, double pricePerUnit) {
         return qty * pricePerUnit;
     }
