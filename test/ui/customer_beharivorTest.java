@@ -42,7 +42,6 @@ public class customer_beharivorTest {
     }
 
     @Test
-
     public void testValidCustomerId() throws SQLException {
         // Valid customer ID
         txt_cid.setText("519");  // Set a valid customer ID

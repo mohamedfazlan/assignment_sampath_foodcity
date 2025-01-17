@@ -47,6 +47,7 @@ public class loginpageTest {
         assertEquals("Expected invalid credentials message", "invalid credentials", result);
     }
 
+    
     @Test
     public void checkAdminValid() throws SQLException {
         // Test for valid credentials with correct username, password, and userType

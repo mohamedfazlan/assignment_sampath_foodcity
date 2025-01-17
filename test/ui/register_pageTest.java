@@ -64,6 +64,7 @@ public class register_pageTest {
 
         assertEquals("empty fields", result);
     }
+      
       @Test
       public void checkInvalidUserType() throws SQLException {
         String fullName = "Jane Doe";
