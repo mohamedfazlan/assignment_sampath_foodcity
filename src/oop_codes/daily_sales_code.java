@@ -1,15 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package oop_codes;
 
-/**
- *
- * @author FAZLAN
- */
-public class report_total_month {
+package oop_codes;
+public class daily_sales_code {
     private String productName;
     private int quantity;
     private double pricePerUnit;
@@ -47,4 +38,5 @@ public class report_total_month {
         this.totalSold = totalSold;
     }
 
+    
 }

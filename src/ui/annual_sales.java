@@ -16,15 +16,21 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import oop_codes.customer_report;
-import oop_codes.product_report_code;
+import oop_codes.daily_sales_code;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.util.Calendar;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import oop_codes.ObjectFactory;
-import oop_codes.report_total_month;
+import oop_codes.monthly_sales_code;
 import oop_codes.t_cal;
-import oop_codes.t_cal2;
+
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 
 public class annual_sales extends javax.swing.JFrame {
 
@@ -393,8 +399,8 @@ public class annual_sales extends javax.swing.JFrame {
         customer_table_2.setModel(customerModel);
 
         // Initialize objects for handling product data and calculations
-        report_total_month product = new report_total_month();
-        t_cal calculator = new t_cal2();  // Use the subclass of report_total for inheritance
+        monthly_sales_code product = new monthly_sales_code();
+        t_cal calculator = new t_cal();  // Use the subclass of report_total for inheritance
 
         double totalSales = 0.0;
 

@@ -16,15 +16,21 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import oop_codes.customer_report;
-import oop_codes.product_report_code;
+import oop_codes.daily_sales_code;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import com.toedter.calendar.JDateChooser;
 import java.util.Calendar;
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import oop_codes.report_total_month;
+import oop_codes.monthly_sales_code;
 import oop_codes.t_cal;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 
 public class employee_monthly_sales extends javax.swing.JFrame {
 
@@ -385,7 +391,8 @@ public class employee_monthly_sales extends javax.swing.JFrame {
 
     public class Monthly_Sales_Performance extends monthly_sales {
 
-        public void MonthlySales(JDateChooser startDate, JDateChooser enddate, JTable product_table_1, JTable customer_table_2, JTextField txttotal) {
+        public void MonthlySales(JDateChooser startDate, JDateChooser enddate, JTable product_table_1,
+        JTable customer_table_2, JTextField txttotal) {
             // Call the inherited monthly_sales method using the super keyword
             monthly_sales(startDate, enddate, product_table_1, customer_table_2, txttotal);
         }

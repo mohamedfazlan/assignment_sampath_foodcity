@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 import oop_codes.ObjectFactory;
 import oop_codes.branch_p;
 import oop_codes.t_cal;
-import oop_codes.t_cal2;
+
 
 public class brach_performance extends javax.swing.JFrame {
 
@@ -357,7 +357,7 @@ public class brach_performance extends javax.swing.JFrame {
             customer_analysis_table.setModel(model); // Set table model to `customer_analysis_table`
 
             // Instantiate polymorphic 
-            t_cal calculator = new t_cal2();
+            t_cal calculator = new t_cal();
 
             // Variables to track overall totals and most sold product
             double overallTotalSpent = 0.0;

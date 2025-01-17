@@ -16,7 +16,7 @@ import java.sql.SQLException;
  */
 public class ObjectFactory {
     public static t_cal createCalculator(){
-        return new t_cal2();
+        return new t_cal();
     }
     
      // Method to convert java.util.Date to java.sql.Date

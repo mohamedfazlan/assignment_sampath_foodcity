@@ -320,7 +320,8 @@ public class product_performance_employee extends javax.swing.JFrame {
     public class productperformanceemployee extends product_performance {
 
         // Method to generate the product performance report
-        public void generateProductPerformanceReport(JTextField txtname, JTable productTable, JTextField regionField) {
+        public void generateProductPerformanceReport(JTextField txtname, JTable productTable,
+       JTextField regionField) {
             // Calling the parent class method and passing the correct parameters
             super.productPerformance(txtname, productTable, txtregion);
         }

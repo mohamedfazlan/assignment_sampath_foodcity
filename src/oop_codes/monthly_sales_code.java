@@ -9,7 +9,7 @@ package oop_codes;
  *
  * @author FAZLAN
  */
-public class product_report_code {
+public class monthly_sales_code {
     private String productName;
     private int quantity;
     private double pricePerUnit;
@@ -47,5 +47,4 @@ public class product_report_code {
         this.totalSold = totalSold;
     }
 
-    
 }

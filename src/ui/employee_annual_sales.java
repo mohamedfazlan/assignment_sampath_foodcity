@@ -16,13 +16,19 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import oop_codes.customer_report;
-import oop_codes.product_report_code;
+import oop_codes.daily_sales_code;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.util.Calendar;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import oop_codes.report_total_month;
+import oop_codes.monthly_sales_code;
 import oop_codes.t_cal;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 
 public class employee_annual_sales extends javax.swing.JFrame {
 
@@ -376,7 +382,8 @@ public class employee_annual_sales extends javax.swing.JFrame {
 
     public class Annual_Sales_Performance extends annual_sales {
 
-        public void AnnualSales(JTextField txtyear, JTextField txttotal, JTable product_table_1, JTable customer_table_2) {
+        public void AnnualSales(JTextField txtyear, JTextField txttotal, JTable product_table_1, 
+        JTable customer_table_2) {
             super.annual_sales(txtyear, txttotal, product_table_1, customer_table_2);
         }
     }

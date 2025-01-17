@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import oop_codes.customer_report;
-import oop_codes.product_report_code;
+import oop_codes.daily_sales_code;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
@@ -25,7 +25,11 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import oop_codes.ObjectFactory;
 import oop_codes.t_cal;
-import oop_codes.t_cal2;
+
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 
 public class daily_sales extends javax.swing.JFrame {
 
@@ -394,8 +398,8 @@ public class daily_sales extends javax.swing.JFrame {
         customer_table.setModel(customerModel); // Set the model to your customer_table
 
 // Initialize objects for handling product data and calculations
-        product_report_code product = new product_report_code();
-        t_cal calculator = new t_cal2();  // Initialize report_total for calculations
+        daily_sales_code product = new daily_sales_code();
+        t_cal calculator = new t_cal();  // Initialize report_total for calculations
 
         double totalSales = 0.0;
 

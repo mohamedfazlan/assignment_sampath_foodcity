@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
 import oop_codes.ObjectFactory;
 import oop_codes.produtc_performance;
 import oop_codes.t_cal;
-import oop_codes.t_cal2;
+
 
 /**
  *
@@ -368,7 +368,7 @@ public class product_performance extends javax.swing.JFrame {
 
                 double overallTotal = 0.0;
                 boolean dataFound = false;
-                t_cal calculator = new t_cal2(); // Instantiate total calculator
+                t_cal calculator = new t_cal(); // Instantiate total calculator
                 String topRegion = "";  // To store region with most sales
                 int maxQty = 0; // To track the maximum sales quantity for any region
 

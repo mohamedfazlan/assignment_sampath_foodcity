@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import oop_codes.customer_report;
-import oop_codes.product_report_code;
+import oop_codes.daily_sales_code;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
@@ -24,6 +24,10 @@ import com.toedter.calendar.JDateChooser;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import oop_codes.t_cal;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 
 public class employee_daily_sales extends javax.swing.JFrame {
 
@@ -381,7 +385,8 @@ public class employee_daily_sales extends javax.swing.JFrame {
 
     public class DailySalesPerformance extends daily_sales {
 
-        public void DailySales(JDateChooser date1, JTable product_report, JTable customer_table, JTextField txttotal_sales) {
+        public void DailySales(JDateChooser date1, JTable product_report, JTable customer_table,
+        JTextField txttotal_sales) {
             // Call the inherited daily_sales method
             super.daily_sales(date1, product_report, customer_table, txttotal_sales);
         }

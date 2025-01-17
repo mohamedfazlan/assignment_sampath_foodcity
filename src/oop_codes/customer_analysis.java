@@ -1,14 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package oop_codes;
 
-/**
- *
- * @author FAZLAN
- */
 public class customer_analysis {
     // Class representing customer details (Encapsulation)
 
@@ -40,9 +32,6 @@ public class customer_analysis {
     public double getTotalSpent() {
         return totalSpent;
     }
-
-    
-
     // Constructor
     public customer_analysis(String region, String productName, double totalSpent) {
         this.region = region;
@@ -50,7 +39,6 @@ public class customer_analysis {
         this.totalSpent = totalSpent;
     }
 
-  
 }
 
 

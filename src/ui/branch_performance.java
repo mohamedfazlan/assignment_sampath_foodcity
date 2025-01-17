@@ -332,11 +332,14 @@ public class branch_performance extends javax.swing.JFrame {
     public class BranchSalesPerformance extends brach_performance {
 
         // Method to invoke superclass method using inheritance
-        public void BranchPerformanceAnalysis(String txt_reigon, JTable customer_analysis_table, JTextField total, JTextField total_qty, JTextField txtProduct) {
+        public void BranchPerformanceAnalysis(String txt_reigon, JTable customer_analysis_table, JTextField total, 
+        JTextField total_qty, JTextField txtProduct) {
             super.branch_performance(txt_reigon, customer_analysis_table, total, total_qty, txtProduct);
         }
     }
 
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

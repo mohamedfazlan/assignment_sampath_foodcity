@@ -85,7 +85,9 @@ public class add_product {
     }
     
     // Constructor
-    public add_product(int customerID, int productID, String productName, int qty, float unitPrice, Date date, float totalPrice, String region) {
+    public add_product(int customerID, int productID, String productName, int qty, float unitPrice, Date date, 
+    float totalPrice, String region) {
+        
         this.customerID = customerID;
         this.ProductID = productID;
         this.productname = productName;
@@ -96,3 +98,5 @@ public class add_product {
         this.region = region;
     }
 }
+
+

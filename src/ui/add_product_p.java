@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
 import oop_codes.ObjectFactory;
 import oop_codes.add_product;
 import oop_codes.t_cal;
-import oop_codes.t_cal2;
+
 import static org.omg.CORBA.AnySeqHelper.insert;
 
 public class add_product_p extends javax.swing.JFrame {
@@ -571,7 +571,7 @@ public class add_product_p extends javax.swing.JFrame {
             float unitPrice = Float.parseFloat(unitprice);
 
             // Calculate total price
-            t_cal calculator = new t_cal2();
+            t_cal calculator = new t_cal();
 
             // Use polymorphism to calculate total price by calling the overridden method in t_cal2
             double totalPrice = calculator.calculateTotal(quantity, unitPrice);
