@@ -28,8 +28,6 @@ public class loginpage extends javax.swing.JFrame {
         initComponents();
     }
 
- 
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -197,9 +195,8 @@ public class loginpage extends javax.swing.JFrame {
         String username = txtusername.getText();
         String password = txtpass.getText();
         String userType = String.valueOf(jComboBox1.getSelectedItem());
-        
+
         String isLoggedIn = login1.login(username, password, userType);
-        
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -217,63 +214,56 @@ public class loginpage extends javax.swing.JFrame {
         txtusername.setText("");
         txtpass.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
-    
+
     public String login(String username, String password, String userType) {
-    String fname = null;
-    
-     if (username.isEmpty() || password.isEmpty() || userType.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Please fill all the fields.");
-        return "empty fields";  // Return empty fields if any field is empty
-    }
-    
-    
-    try {
-        String query = "SELECT * FROM `user_register` WHERE email=? and password=? and usertype=?";
-        Connection con = database.getConnection();
-        PreparedStatement pst = con.prepareStatement(query);
-        pst.setString(1, username);
-        pst.setString(2, password);
-        pst.setString(3, userType);
-        ResultSet rs = pst.executeQuery();
-        
-        if (rs.next()) {
-            fname = rs.getString("full_name"); //name
-            String dbUserType = rs.getString("usertype"); // Get the user type from the database
-            
-            JOptionPane.showMessageDialog(null, "Email and password matched. You are logged in as " + dbUserType);
-            
-            if (dbUserType.equalsIgnoreCase("admin")) { // Case-insensitive comparison
-                admin_dashboard ad = new admin_dashboard();
-                ad.setUser(fname); 
-                ad.setVisible(true);
-                this.dispose();
-                
-                return "success";  // Return success for admin login
-            } else if (dbUserType.equalsIgnoreCase("employee")) { // Case-insensitive comparison
-                
-                employee_dashbaord ed = new employee_dashbaord();
-                ed.setUser(fname); 
-                
-                ed.setVisible(true);
-                this.dispose();
-                return "success";  // Return success for employee login
-            } 
-            return "invalid user type";  // Return invalid user type
-        } else {
-            JOptionPane.showMessageDialog(null, "Email and Password do not match.");
-   
-            return "invalid credentials";  // Return invalid credentials
+        String fname = null;
+
+        if (username.isEmpty() || password.isEmpty() || userType.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please fill all the fields.");
+            return "empty fields";  // Return empty fields if any field is empty
         }
-    } catch (SQLException | HeadlessException ex) {
-        JOptionPane.showMessageDialog(null, ex.getMessage());
-        return "error";  // Return error if exception occurs
+
+        try {
+            String query = "SELECT * FROM `user_register` WHERE email=? and password=? and usertype=?";
+            Connection con = database.getConnection();
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, username);
+            pst.setString(2, password);
+            pst.setString(3, userType);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                fname = rs.getString("full_name"); //name
+                String dbUserType = rs.getString("usertype"); // Get the user type from the database
+
+                JOptionPane.showMessageDialog(null, "Email and password matched. You are logged in as " + dbUserType);
+
+                if (dbUserType.equalsIgnoreCase("admin")) { // Case-insensitive comparison
+                    admin_dashboard ad = new admin_dashboard();
+                    ad.setUser(fname);
+                    ad.setVisible(true);
+                    this.dispose();
+
+                    return "success";  // Return success for admin login
+                } else if (dbUserType.equalsIgnoreCase("employee")) { // Case-insensitive comparison
+
+                    employee_dashbaord ed = new employee_dashbaord();
+                    ed.setUser(fname);
+                    ed.setVisible(true);
+                    this.dispose();
+                    return "success";  // Return success for employee login
+                }
+                return "invalid user type";  // Return invalid user type
+            } else {
+                JOptionPane.showMessageDialog(null, "Email and Password do not match.");
+
+                return "invalid credentials";  // Return invalid credentials
+            }
+        } catch (SQLException | HeadlessException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            return "error";  // Return error if exception occurs
+        }
     }
-}
-
-    
-
-
-
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
