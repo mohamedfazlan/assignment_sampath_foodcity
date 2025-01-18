@@ -369,6 +369,8 @@ public class best_selling_product extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Database error: " + ex.getMessage());
         }
     }
+    
+    
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
