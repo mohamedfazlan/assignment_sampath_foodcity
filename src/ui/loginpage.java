@@ -244,19 +244,24 @@ public class loginpage extends javax.swing.JFrame {
             
             if (dbUserType.equalsIgnoreCase("admin")) { // Case-insensitive comparison
                 admin_dashboard ad = new admin_dashboard();
-                ad.setUser(fname);                
+                ad.setUser(fname); 
                 ad.setVisible(true);
+                this.dispose();
+                
                 return "success";  // Return success for admin login
             } else if (dbUserType.equalsIgnoreCase("employee")) { // Case-insensitive comparison
                 
                 employee_dashbaord ed = new employee_dashbaord();
                 ed.setUser(fname); 
+                
                 ed.setVisible(true);
+                this.dispose();
                 return "success";  // Return success for employee login
             } 
             return "invalid user type";  // Return invalid user type
         } else {
             JOptionPane.showMessageDialog(null, "Email and Password do not match.");
+   
             return "invalid credentials";  // Return invalid credentials
         }
     } catch (SQLException | HeadlessException ex) {
@@ -265,6 +270,7 @@ public class loginpage extends javax.swing.JFrame {
     }
 }
 
+    
 
 
 
